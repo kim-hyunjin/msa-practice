@@ -12,11 +12,9 @@ spring:
       path: /h2-console
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
-    generate-ddl: true
     database: h2
-    defer-datasource-initialization: true
   datasource:
     driver-class-anme: org.h2.Driver
     url: jdbc:h2:mem:testdb
@@ -32,4 +30,4 @@ eureka:
 
 logging:
   level:
-    com.example.catalogservice: DEBUG
+    com.example.orderservice: DEBUG
