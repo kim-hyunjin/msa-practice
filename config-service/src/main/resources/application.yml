@@ -11,3 +11,4 @@ spring:
           search-locations: file:///C:\\Users\\ygaso\\workspace\\config-local
         git:
           uri: file:///C:\\Users\\ygaso\\workspace\\config-local
+          default-label: main # 설정하지 않으면 기본값은 master
