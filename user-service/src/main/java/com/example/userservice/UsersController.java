@@ -6,6 +6,7 @@ import com.example.userservice.service.UserService;
 import com.example.userservice.vo.RequestUser;
 import com.example.userservice.vo.ResponseUser;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -19,6 +20,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/")
+@Slf4j
 public class UsersController {
 
     private final ModelMapper modelMapper;
@@ -58,7 +60,11 @@ public class UsersController {
     }
 
     @GetMapping("/health-check")
-    public String status() { return String.format("It's working in User Service on PORT %s", env.getProperty("local.server.port")); }
+    public String status() {
+        log.debug("token secret : {}", env.getProperty("token.secret"));
+        log.debug("token expiration_time : {}", env.getProperty("token.expiration_time"));
+        return String.format("It's working in User Service on PORT %s", env.getProperty("local.server.port"));
+    }
 
     @GetMapping("/welcome")
     public String welcome() {

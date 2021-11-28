@@ -7,5 +7,7 @@ spring:
   cloud:
     config:
       server:
+        native:
+          search-locations: file:///C:\\Users\\ygaso\\workspace\\config-local
         git:
           uri: file:///C:\\Users\\ygaso\\workspace\\config-local
