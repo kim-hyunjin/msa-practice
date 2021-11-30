@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: config-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   cloud:
     config:
       server:
@@ -16,3 +21,9 @@ spring:
 
           #uri: file:///C:\\Users\\ygaso\\workspace\\config-local
           #default-label: main # 설정하지 않으면 기본값은 master
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh
