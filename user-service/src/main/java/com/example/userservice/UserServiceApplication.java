@@ -28,7 +28,7 @@ public class UserServiceApplication {
 	}
 
 	@Bean
-	public Logger.Level feignLoggerLevel() {
+	public Logger.Level feignLoggerLevel() { // FeignClient의 로그를 보기 위해 Bean으로 등록해두어야 한다.
 		return Logger.Level.FULL;
 	}
 }

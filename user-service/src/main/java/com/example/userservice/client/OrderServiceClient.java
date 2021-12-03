@@ -19,6 +19,6 @@ import java.util.List;
 @FeignClient(name = "order-service")
 public interface OrderServiceClient {
 
-    @GetMapping("/order-service/{userId}/orders")
+    @GetMapping("/order-service/{userId}/orders_ng")
     List<ResponseOrder> getOrders(@PathVariable String userId); // ResponseEntity<List<ResponseOrder>> 로 받을 수도 있다.
 }
