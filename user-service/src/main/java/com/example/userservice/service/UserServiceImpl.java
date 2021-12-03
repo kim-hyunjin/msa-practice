@@ -1,5 +1,6 @@
 package com.example.userservice.service;
 
+import com.example.userservice.client.OrderServiceClient;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.jpa.UserRepository;
@@ -33,7 +34,9 @@ public class UserServiceImpl implements UserService {
 
     private final Environment env;
 
-    private final RestTemplate restTemplate;
+//    private final RestTemplate restTemplate;
+
+    private final OrderServiceClient orderServiceClient;
 
     @Override
     public UserDto createUser(UserDto userDto) {
@@ -56,11 +59,15 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = modelMapper.map(userEntity, UserDto.class);
 
         // order 정보 - using rest template
-        String orderUrl = String.format(env.getProperty("order_service.url"), userId);
-        ResponseEntity<List<ResponseOrder>> orderListResponse =
-                restTemplate.exchange(orderUrl, HttpMethod.GET, null,
-                        new ParameterizedTypeReference<List<ResponseOrder>>() {});
-        userDto.setOrders(orderListResponse.getBody());
+//        String orderUrl = String.format(env.getProperty("order_service.url"), userId);
+//        ResponseEntity<List<ResponseOrder>> orderListResponse =
+//                restTemplate.exchange(orderUrl, HttpMethod.GET, null,
+//                        new ParameterizedTypeReference<List<ResponseOrder>>() {});
+//        userDto.setOrders(orderListResponse.getBody());
+
+        // order 정보 - using FeignClient
+        List<ResponseOrder> orderList = orderServiceClient.getOrders(userId);
+        userDto.setOrders(orderList);
 
         return userDto;
     }
