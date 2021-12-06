@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 public class KafkaProducer {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
-    private final ObjectMapper objectMapper;
 
     public OrderDto sendOrder(String kafkaTopic, OrderDto orderDto) {
         String jsonString = "";
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
           jsonString = objectMapper.writeValueAsString(orderDto);
         } catch (JsonProcessingException e) {

@@ -4,7 +4,6 @@ import com.example.catalogservice.jpa.CatalogEntity;
 import com.example.catalogservice.jpa.CatalogRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,13 +18,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class KafkaConsumer {
     private final CatalogRepository repository;
-    private final ObjectMapper objectMapper;
 
     @KafkaListener(topics = "example-order-topic")
     public void updateQty(String kafkaMessage) {
         log.info("Kafka Message: ==> {}", kafkaMessage);
 
         Map<Object, Object> map = new HashMap<>();
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
             // string to json
             map = objectMapper.readValue(kafkaMessage, new TypeReference<Map<Object, Object>>() {});
