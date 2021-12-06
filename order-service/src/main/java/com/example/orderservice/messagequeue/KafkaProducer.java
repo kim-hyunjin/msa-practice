@@ -1,4 +1,4 @@
-package com.example.orderservice.service;
+package com.example.orderservice.messagequeue;
 
 import com.example.orderservice.dto.OrderDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -16,7 +16,7 @@ public class KafkaProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper;
 
-    public OrderDto send(String kafkaTopic, OrderDto orderDto) {
+    public OrderDto sendOrder(String kafkaTopic, OrderDto orderDto) {
         String jsonString = "";
         try {
           jsonString = objectMapper.writeValueAsString(orderDto);

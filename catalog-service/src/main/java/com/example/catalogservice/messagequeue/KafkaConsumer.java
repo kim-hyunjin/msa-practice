@@ -1,4 +1,4 @@
-package com.example.catalogservice.service;
+package com.example.catalogservice.messagequeue;
 
 import com.example.catalogservice.jpa.CatalogEntity;
 import com.example.catalogservice.jpa.CatalogRepository;
@@ -22,20 +22,21 @@ public class KafkaConsumer {
     private final ObjectMapper objectMapper;
 
     @KafkaListener(topics = "example-order-topic")
-    public void processMessage(String kafkaMessage) {
+    public void updateQty(String kafkaMessage) {
         log.info("Kafka Message: ==> {}", kafkaMessage);
 
         Map<Object, Object> map = new HashMap<>();
         try {
-            map = objectMapper.readValue(kafkaMessage, new TypeReference<Map<Object, Object>>() {
-            });
+            // string to json
+            map = objectMapper.readValue(kafkaMessage, new TypeReference<Map<Object, Object>>() {});
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
         CatalogEntity entity = repository.findByProductId((String)map.get("productId"));
-        entity.setStock(entity.getStock() - (Integer)map.get("qty"));
-
-        repository.save(entity);
+        if (entity != null) {
+            entity.setStock(entity.getStock() - (Integer)map.get("qty"));
+            repository.save(entity);
+        }
     }
 }
