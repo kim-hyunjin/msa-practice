@@ -63,7 +63,7 @@ plugin.path=/Users/hyunjin/dev/kafka/confluentinc-kafka-connect-jdbc-10.2.5/lib
 $ /Users/hyunjin/dev/kafka/confluent-6.1.0/bin/connect-distributed etc/kafka/connect-distributed.properties
 
 # 실행 (Windows)
-$ .\bin\windows\connect-distributed.bat . \etc\kafka\connect-distributed.properties
+$ .\bin\windows\connect-distributed.bat .\etc\kafka\connect-distributed.properties
 
 # 구동 확인
 $ curl http://localhost:8083/

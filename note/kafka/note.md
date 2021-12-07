@@ -86,3 +86,14 @@ $KAFKA_HOME/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic q
 $KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic quickstart-events \
 --from-beginning
 ```
+
+### Kafka 사용 예
+
+한 서비스에 인스턴스가 여러개 일때, 인스턴스마다 서로 다른 DB를 사용한다면?  
+인스턴스 간 `데이터 동기화 문제 발생`한다!  
+==> 이 때 kafka 등장, `kafka sink connector`로 topic에 들어오는 메시지를 `단일 DB`에 저장함으로써 데이터 동기화 문제를 `해결할 수 있다.`  
+==> CQRS 패턴을 적용하면 성능적으로 더 큰 효과를 볼 수 있다.
+
+#### CQRS 패턴이란?
+
+https://docs.microsoft.com/ko-kr/azure/architecture/patterns/cqrs
