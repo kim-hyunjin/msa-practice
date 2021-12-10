@@ -5,6 +5,7 @@ import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.service.UserService;
 import com.example.userservice.vo.RequestUser;
 import com.example.userservice.vo.ResponseUser;
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -61,6 +62,7 @@ public class UsersController {
     }
 
     @GetMapping("/health-check")
+    @Timed(value = "users.status", longTask = true)
     public String status() {
         log.debug("token secret : {}", env.getProperty("token.secret"));
         log.debug("token expiration_time : {}", env.getProperty("token.expiration_time"));
@@ -68,6 +70,7 @@ public class UsersController {
     }
 
     @GetMapping("/welcome")
+    @Timed(value = "users.welcome", longTask = true)
     public String welcome() {
         return message;
     }
