@@ -1,0 +1,14 @@
+scrape_configs:
+  - job_name: "prometheus"
+
+    # metrics 경로 기본값: /metrics
+    # 기본 scheme: http
+
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  - job_name: "user-service"
+    scrape_interval: 15s
+    metrics_path: "/user-service/actuator/prometheus"
+    static_configs:
+      targets: ["localhost:8000"]
