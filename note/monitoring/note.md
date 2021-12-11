@@ -41,3 +41,7 @@ docker run -d --name=grafana -p 3000:3000 grafana/grafana-enterprise:8.3.2-ubunt
 
 - http://localhost:3000
 - ID: admin, PW: admin
+
+### 대시보드 설정
+
+https://grafana.com/grafana/dashboards/
