@@ -38,6 +38,8 @@ public class OrderController {
         List<ResponseOrder> result = new ArrayList<>();
         orderEntities.forEach(o -> result.add(modelMapper.map(o, ResponseOrder.class)));
 
+        /*
+
         try {
             Thread.sleep(1000);
             throw new Exception("장애 발생 테스트");
@@ -45,6 +47,7 @@ public class OrderController {
             log.warn(ex.getMessage());
         }
 
+        */
         log.info("After retrieve orders data");
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
@@ -59,17 +62,17 @@ public class OrderController {
         OrderDto createdOrder = orderService.createOrder(orderDto);
         ResponseOrder responseOrder = modelMapper.map(createdOrder, ResponseOrder.class);
 
-        orderDto.setTotalPrice(orderDetails.getQty() * orderDetails.getUnitPrice());
 
-        /* kafka
-        orderDto.setOrderId(UUID.randomUUID().toString());
+        /* kafka */
+        // orderDto.setOrderId(UUID.randomUUID().toString());
+        // orderDto.setTotalPrice(orderDetails.getQty() * orderDetails.getUnitPrice());
 
-        Send an order to the Kafka
+        /* Send an order to the Kafka */
         kafkaProducer.sendOrder("example-order-topic", orderDto);
-        orderProducer.send("orders", orderDto);
+        // orderProducer.send("orders", orderDto);
 
-        ResponseOrder responseOrder = modelMapper.map(orderDto, ResponseOrder.class);
-        */
+        // ResponseOrder responseOrder = modelMapper.map(orderDto, ResponseOrder.class);
+        
         log.info("After create order data");
         return ResponseEntity.status(HttpStatus.CREATED).body(responseOrder);
     }

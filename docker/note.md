@@ -107,3 +107,25 @@ $ docker run -d --network ecommerce-network \
 
  ygasok21/user-service
 ```
+
+# order service
+
+```
+$ docker run -d --network ecommerce-network \
+
+  --name order-service \
+
+ -e "spring.zipkin.base-url=http://zipkin:9411" \
+
+ -e "eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka/" \
+
+ -e "spring.datasource.url=jdbc:mariadb://mariadb:3306/mydb" \
+
+ -e "kafka.my-config.host=172.18.0.101"
+
+ -e "kafka.my-config.port=9092"
+
+ -e "logging.file=/api-logs/orders-ws.log" \
+
+ ygasok21/order-service
+```
