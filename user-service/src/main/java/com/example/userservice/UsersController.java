@@ -64,6 +64,7 @@ public class UsersController {
     @GetMapping("/health-check")
     @Timed(value = "users.status", longTask = true)
     public String status() {
+        log.debug("설정된 게이트웨이 ip : {}", env.getProperty("gateway.ip"));
         log.debug("token secret : {}", env.getProperty("token.secret"));
         log.debug("token expiration_time : {}", env.getProperty("token.expiration_time"));
         return String.format("It's working in User Service on PORT %s", env.getProperty("local.server.port"));
