@@ -27,3 +27,32 @@ $ docker run -d --name rabbitmq --network ecommerce-network -p 15672:15672 -p 56
 
 $ docker run -d -p 8888:8888 --network ecommerce-network -e "spring.rabbitmq.host=rabbitmq" -e "spring.profiles.active=default" --name config-service ygasok21/config-service:1.0
 ```
+
+# apigateway service
+
+```
+$ docker run -d -p 8000:8000 --network ecommerce-network \
+
+ -e "spring.cloud.config.uri=http://config-service:8888" \
+
+ -e "spring.rabbitmq.host=rabbitmq" \
+
+ -e "eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka/" \
+
+ --name apigateway-service \
+
+ ygasok21/apigateway-service:1.0
+```
+
+# mariadb
+
+```
+$ docker run -d -p 3306:3306 --network ecommerce-network --name mariadb -v ~/dev/Shared/data/mariadb:/var/lib/mysql ygasok21/my_mariadb:1.0
+
+$ 다른 마이크로서비스에서 접근할 수 있도록 권한 수정
+$ docker exec -it mariadb bash
+
+$ mysql -uroot -p1234
+
+$ grant all privileges on *.* to 'root'@'%' identified by '1234';
+```
