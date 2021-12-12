@@ -28,6 +28,12 @@ $ docker run -d --name rabbitmq --network ecommerce-network -p 15672:15672 -p 56
 $ docker run -d -p 8888:8888 --network ecommerce-network -e "spring.rabbitmq.host=rabbitmq" -e "spring.profiles.active=default" --name config-service ygasok21/config-service:1.0
 ```
 
+# discovery service
+
+```
+$ docker run -d -p 8761:8761 --network ecommerce-network -e "spring.cloud.config.uri=http://config-service:8888" --name discovery-service ygasok21/discovery-service:1.0
+```
+
 # apigateway service
 
 ```
@@ -55,4 +61,29 @@ $ docker exec -it mariadb bash
 $ mysql -uroot -p1234
 
 $ grant all privileges on *.* to 'root'@'%' identified by '1234';
+```
+
+# kafka
+
+```
+# docker/kafka/docker-compose.yml 파일 사용
+$ docker-compose up -d
+```
+
+# zipkin
+
+```
+$ docker run -d -p 9411:9411 --network ecommerce-network --name zipkin openzipkin/zipkin
+```
+
+# prometheus
+
+```
+$ docker run -d -p 9090:9090 --network ecommerce-network --name prometheus -v /Users/hyunjin/workspace/msa-practice/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+```
+
+# grafana
+
+```
+$ docker run -d -p 3000:3000 --network ecommerce-network --name grafana grafana/grafana
 ```
