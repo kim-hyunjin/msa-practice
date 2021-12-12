@@ -30,6 +30,11 @@ eureka:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
 
+kafka:
+  my-config:
+    host: 127.0.0.1
+    port: 9092
+
 logging:
   level:
     com.example.catalogservice: DEBUG

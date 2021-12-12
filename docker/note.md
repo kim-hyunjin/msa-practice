@@ -129,3 +129,21 @@ $ docker run -d --network ecommerce-network \
 
  ygasok21/order-service
 ```
+
+# catalog service
+
+```
+$ docker run -d --network ecommerce-network \
+
+  --name catalog-service \
+
+ -e "eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka/" \
+
+ -e "kafka.my-config.host=172.18.0.101" \
+
+ -e "kafka.my-config.port=9092" \
+
+ -e "logging.file=/api-logs/catalogs-ws.log" \
+
+ ygasok21/catalog-service
+```
