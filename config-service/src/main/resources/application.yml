@@ -15,7 +15,7 @@ spring:
         #native:
         #  search-locations: file:///C:\\Users\\ygaso\\workspace\\config-local # 로컬 파일시스템 해당 경로에서 설정 파일 불러옴
         git:
-          uri: https://github.com/kim-hyunjin/spring-cloud-config.git
+          uri: https://github.com/kim-hyunjin/msa-practice-config.git
           #username: [my username] # private repo 인 경우 필요
           #password: [my password]
 
